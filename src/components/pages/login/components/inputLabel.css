@@ -1,0 +1,62 @@
+.divInput {
+  display: flex;
+}
+
+.iconInput {
+  display: flex;
+  position: absolute;
+  width: 15px;
+  height: 18px;
+  padding-right: 5px;
+  margin: 10px 0px 0px 30px;
+  border-right: 1px solid;
+}
+
+.inputLogin {
+  border-radius: 20px;
+  padding: 12px 15px 12px 60px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 100%;
+}
+
+.butRecSenha {
+  display: flex;
+  margin: 5px -50% 0px 0px;
+  background-color: #00000000;
+  color: rgb(50, 50, 50);
+  font-size: 0.75em;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.butRecSenha:hover {
+  transform: scale(1.02);
+}
+
+.butLogin {
+  display: flex;
+  position: absolute;
+  bottom: 12%;
+  font-size: 1.3em;
+  background-color: #00000000;
+  padding: 5px 55px;
+  border-radius: 10px;
+  border: 1px solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  opacity: 0.7;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.butLogin:hover {
+  transform: scale(1.02);
+}
+
+.iconInputVisible {
+  display: flex;
+  position: absolute;
+  width: 18px;
+  height: 20px;
+  margin: 10px 0px 0px 360px;
+}

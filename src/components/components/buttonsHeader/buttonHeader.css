@@ -1,0 +1,16 @@
+.divButtonHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background-color: #00000000;
+  cursor: pointer;
+
+  .iconsButtonHeader {
+    width: 15px;
+  }
+}
+
+.divButtonHeader:hover {
+  transform: scale(1.02);
+}

@@ -1,0 +1,30 @@
+.ContainerLayout {
+  display: flex;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: lightgray;
+  justify-content: center;
+
+  .divContentGeral {
+    display: flex;
+    flex-direction: column;
+    width: calc(500px + 20%);
+    height: 100%;
+
+    .divHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      height: 10%;
+      background-color: brown;
+    }
+
+    .divContentInfo {
+      display: flex;
+      width: 100%;
+      height: 90%;
+      background-color: rgb(240, 240, 240);
+    }
+  }
+}
