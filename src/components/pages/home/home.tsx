@@ -1,54 +1,67 @@
+import { useEffect, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import "./home.css";
 
 const Home: React.FC = () => {
-  const ext = [
+  type Spent = {
+    nome: string;
+    valor: number;
+    categoria: string;
+    data: Date;
+  };
+  const [extLast, setExtLast] = useState<Spent[]>([]);
+
+  const ext: Spent[] = [
     {
       nome: "Academia",
-      valor: "R$ 124,32",
-      Categoria: "Saúde",
-      data: "01/01/2021",
+      valor: 124.32,
+      categoria: "Saúde",
+      data: new Date("01/01/2021"),
     },
     {
       nome: "Academia",
-      valor: "R$ 124,32",
-      Categoria: "Saúde",
-      data: "01/01/2021",
+      valor: 124.32,
+      categoria: "Saúde",
+      data: new Date("01/01/2021"),
     },
     {
       nome: "Academia",
-      valor: "R$ 124,32",
-      Categoria: "Saúde",
-      data: "01/01/2021",
+      valor: 124.32,
+      categoria: "Saúde",
+      data: new Date("01/01/2021"),
     },
     {
       nome: "Academia",
-      valor: "R$ 124,32",
-      Categoria: "Saúde",
-      data: "01/01/2021",
+      valor: 124.32,
+      categoria: "Saúde",
+      data: new Date("01/01/2021"),
     },
     {
       nome: "Academia",
-      valor: "R$ 124,32",
-      Categoria: "Saúde",
-      data: "01/01/2021",
-    },
-    {
-      nome: "Academia",
-      valor: "R$ 124,32",
-      Categoria: "Saúde",
-      data: "01/01/2021",
+      valor: 124.32,
+      categoria: "Saúde",
+      data: new Date("05/21/2025"),
     },
   ];
+
+  useEffect(() => {
+    const filteredSpent = () => {
+      const date = new Date();
+      date.setDate(date.getDate() - 2);
+      const extLast2days = ext.filter((spent) => spent.data >= date);
+      setExtLast(extLast2days);
+    };
+    filteredSpent();
+  }, []);
+
   return (
     <>
       <Layout>
-        {ext.map((lançamento, index) => {
+        {extLast.map((spent, index) => {
           return (
             <>
               <div key={index}>
-                <h6>{lançamento.nome}</h6>
-                <p>{lançamento.valor}</p>
+                <p>Valor: {spent.valor}</p>
               </div>
             </>
           );

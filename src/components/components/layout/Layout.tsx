@@ -11,9 +11,11 @@ const Layout: React.FC<ILayout> = ({ children }) => {
       <div className="ContainerLayout">
         <div className="divContentGeral">
           <div className="divHeader">
-            <ButtonHeader text="Extrato" redirect="" />
-            <ButtonHeader text="Extrato" redirect="" />
-            <ButtonHeader text="Extrato" redirect="" />
+            <ButtonHeader text="Inicio" redirect="Home" />
+            <ButtonHeader text="Extrato" redirect="Extract" />
+            <ButtonHeader text="Fatura" redirect="" />
+            <ButtonHeader text="Estatistica" redirect="" />
+            <ButtonHeader text="Cadastros" redirect="Registers" />
           </div>
           <div className="divContentInfo">{children}</div>
         </div>
