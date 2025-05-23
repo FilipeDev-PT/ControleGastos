@@ -2,28 +2,18 @@ import { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import "./statistic.css";
 import LucideIcon from "../../components/icons/icons";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
+import GraphicBar from "./graphic/graphicBar/graphicBar";
+import GraphicStack from "./graphic/graphicStack/graphicStack";
+import GraphicArea from "./graphic/graphicArea/graphicArea";
 
 const Statistic: React.FC = () => {
   type Spent = {
     nome: string;
     valor: number;
     categoria: string;
+    essencial: boolean;
     data: Date;
     instFinanceira: string;
-  };
-
-  type ValueGraphicInstFinanceira = {
-    categoria: string;
-    valor: number;
   };
 
   const ext: Spent[] = [
@@ -31,6 +21,7 @@ const Statistic: React.FC = () => {
       nome: "Academia",
       valor: 124.32,
       categoria: "Mercado",
+      essencial: true,
       data: new Date("05/05/2025"),
       instFinanceira: "Inter",
     },
@@ -38,6 +29,7 @@ const Statistic: React.FC = () => {
       nome: "Academia",
       valor: 124.32,
       categoria: "Mercado",
+      essencial: true,
       data: new Date("05/05/2025"),
       instFinanceira: "Inter",
     },
@@ -45,7 +37,8 @@ const Statistic: React.FC = () => {
       nome: "Academia",
       valor: 124.32,
       categoria: "Mercado",
-      data: new Date("05/01/2025"),
+      essencial: false,
+      data: new Date("04/01/2025"),
       instFinanceira: "Inter",
     },
   ];
@@ -59,12 +52,12 @@ const Statistic: React.FC = () => {
 
   const [instFinanceira, setInstFinanceira] = useState<string>("Todos");
   const [categorie, setCategorie] = useState<string>("Todos");
-  const [dateInit, setDateInit] = useState<Date>(new Date());
-  const [dateFim, setDateFim] = useState<Date>(new Date());
-
-  const [valueGraphic, setValueGraphic] = useState<
-    ValueGraphicInstFinanceira[]
-  >([]);
+  const [dateInit, setDateInit] = useState<Date>(
+    new Date(new Date().toISOString().split("T")[0])
+  );
+  const [dateFim, setDateFim] = useState<Date>(
+    new Date(new Date().toISOString().split("T")[0])
+  );
 
   const handleFilterAllItens = () => {
     const filterInstFinanceira = () => {
@@ -77,43 +70,10 @@ const Statistic: React.FC = () => {
           spent.data <= dateFim
       );
 
-      setValueGraphic(resultFilteredGraphic());
-
       setItensFiltered(array);
     };
 
     filterInstFinanceira();
-  };
-
-  const resultFilteredGraphic = () => {
-    const result = Object.entries(
-      itensFiltered.reduce((acc, curr) => {
-        const dataOk =
-          (dateInit == new Date() || curr.data >= dateInit) &&
-          (dateFim == new Date() || curr.data <= dateFim);
-
-        console.log(dateInit, dateFim, instFinanceira, categorie);
-
-        const instFinanceiraOk =
-          instFinanceira == "Todos" || curr.instFinanceira === instFinanceira;
-
-        const categoriaOk =
-          categorie == "Todos" || curr.categoria === categorie;
-
-        if (dataOk && instFinanceiraOk && categoriaOk) {
-          if (!acc[curr.categoria]) {
-            acc[curr.categoria] = 0;
-          }
-          acc[curr.categoria] += curr.valor;
-        }
-
-        return acc;
-      }, {} as Record<string, number>)
-    ).map(([categoria, valor]) => ({
-      categoria,
-      valor,
-    }));
-    return result;
   };
 
   const handleValueInstFin = (value: string) => {
@@ -212,15 +172,29 @@ const Statistic: React.FC = () => {
             </>
           );
         })}
-        <ResponsiveContainer width="50%" height="50%">
-          <BarChart data={valueGraphic}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="categoria" />
-            <YAxis dataKey="valor" />
-            <Tooltip />
-            <Bar dataKey="valor" fill="#38bdf8" radius={[4, 4, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
+        <div className="contentGraphic">
+          <GraphicBar
+            categorie={categorie}
+            dateFim={dateFim}
+            dateInit={dateFim}
+            instFinanceira={instFinanceira}
+            itensFiltered={itensFiltered}
+          />
+          <GraphicStack
+            categorie={categorie}
+            dateFim={dateFim}
+            dateInit={dateFim}
+            instFinanceira={instFinanceira}
+            itensFiltered={itensFiltered}
+          />
+          <GraphicArea
+            categorie={categorie}
+            dateFim={dateFim}
+            dateInit={dateFim}
+            instFinanceira={instFinanceira}
+            itensFiltered={itensFiltered}
+          />
+        </div>
       </Layout>
     </>
   );

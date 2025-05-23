@@ -8,6 +8,7 @@ const Extract: React.FC = () => {
     nome: string;
     valor: number;
     categoria: string;
+    essencial: boolean;
     data: Date;
     instFinanceira: string;
   };
@@ -17,20 +18,23 @@ const Extract: React.FC = () => {
       nome: "Academia",
       valor: 124.32,
       categoria: "Mercado",
-      data: new Date("01/01/2021"),
+      essencial: true,
+      data: new Date("04/10/2025"),
       instFinanceira: "Inter",
     },
     {
       nome: "Academia",
       valor: 124.32,
       categoria: "Mercado",
-      data: new Date("01/01/2021"),
+      essencial: true,
+      data: new Date("03/10/2025"),
       instFinanceira: "Inter",
     },
     {
       nome: "Academia",
       valor: 124.32,
       categoria: "Mercado",
+      essencial: true,
       data: new Date("05/01/2025"),
       instFinanceira: "Inter",
     },
@@ -67,7 +71,7 @@ const Extract: React.FC = () => {
 
   const gastosVisiveis = itensFiltered.slice(0, visibleCount);
 
-  useEffect(() => {
+  const submitFilters = () => {
     const filterInstFinanceira = () => {
       const array = ext.filter(
         (spent) =>
@@ -81,7 +85,7 @@ const Extract: React.FC = () => {
       setItensFiltered(array);
     };
     filterInstFinanceira();
-  }, [valueInstFinanceira, valueCategory, dateInit, dateFim]);
+  };
 
   const handleValueInstFin = (value: string) => {
     setInstFinanceira(value);
@@ -170,6 +174,7 @@ const Extract: React.FC = () => {
               onChange={handleChangeDateFim}
             />
           </div>
+          <button onClick={submitFilters}>Aplicar</button>
         </div>
         <div>
           {gastosVisiveis.map((lançamento, index) => {

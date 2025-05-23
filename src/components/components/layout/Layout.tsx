@@ -1,3 +1,7 @@
+import Category from "../popUps/category/category";
+import ContainerPopUps from "../popUps/components/container";
+import InstFinan from "../popUps/instFinan/instFinan";
+import Spent from "../popUps/spent/spent";
 import ButtonHeader from "./buttonsHeader/buttonHeader";
 import "./Layout.css";
 
@@ -19,6 +23,11 @@ const Layout: React.FC<ILayout> = ({ children }) => {
           <div className="divContentInfo">{children}</div>
         </div>
       </div>
+      <ContainerPopUps>
+        <Spent />
+        <InstFinan />
+        <Category />
+      </ContainerPopUps>
     </>
   );
 };
